@@ -12,3 +12,15 @@
 
 编写std::sort(values.begin(),values.end(),std::greater<quint8>())函数，将数字从大到小排序并输出。
 
+## 提交日期：
+
+2018-10-13，实现作业二要求的功能，共提交了2次
+
+### 第一次提交：
+
+使用一个类student并编写了QList函数，实现了学生信息的输入
+
+### 第二次提交：
+
+使用std::sort函数比较大小，在前面定义三个bool函数，自定义比较函数对QList中的score1、score2、name成员变量排序
+
