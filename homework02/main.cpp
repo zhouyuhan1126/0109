@@ -43,11 +43,16 @@ enum SortKind{
 
 
 typedef struct{
-    // 请补全结构定义
+    // 结构定义
+    QString num;
+    QString name;
+    QVector<int> scores;
 } studData;
 
 QDebug operator<< (QDebug d, const studData &data) {
     // 请补全运算符重载函数，使其可以直接输出studData结构
+    QDebugStateSaver saver(d);
+    d.nospace()<<data.num<<" "<<data.num<<" "<<data.scores;
     return d;
 }
 // 比较类，用于std::sort第三个参数
@@ -63,12 +68,16 @@ bool myCmp::operator()(const studData &d1, const studData &d2)
 {
     bool result = false;
     quint32 sortedColumn = 0x00000001<<currentColumn;
-    switch (sortedColumn) {
-    case SK::col01:
-    // ...
-    // 请补全运算符重载函数
-    // ...
-    //
+    switch (sortedColumn)
+    {
+        case SK::col01:
+            result=d1.name<d2.name;
+            break;
+        case SK::col02:
+            result=d1.num<d2.num;
+            break;
+        default:
+            result=(d1.scores.at(currentColumn-3)<(d2.scores.at(currentColumn-3)));
     }
     return result;
 
