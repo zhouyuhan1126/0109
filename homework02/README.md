@@ -13,4 +13,7 @@
 补全程序并调试，能正确排序，但是显示不整齐；未能将排序后的信息存入sorter_data.txt文件。
 ### 第四次提交：
 
-添加sorter_data.txt文档，但是排序不会控制，很乱。 
+添加sorter_data.txt文档，但是排序不会控制，很乱。
+### 第五次提交：
+
+使用QIODevice::Text，使sorter_data.txt文本内可以换行，实现作业要求，但输出窗口排序仍未整齐。
