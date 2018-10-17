@@ -122,9 +122,9 @@ void ScoreSorter::doSort()
         myCmp cmp(i);
         std::sort(this->Info.begin(),this->Info.end(),cmp);
         qDebug()<<"排序后输出，当前排序第"<<i+1<<"列";
-        qDebug()<<" "<<(this->title);
+        qDebug()<<(this->title);
         for(int i=0;i<this->Info.size();i++)
-            qDebug()<<this->Info.at(i)<<"\t";
+            qDebug()<<this->Info.at(i);
         qDebug()<<"-----------------------------------------------------------------------\n";
 
     }
@@ -138,6 +138,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
     file.open( QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text );
     QTextStream stream(&file);
     stream <<msg << endl;
+    stream.setCodec("UTF-8");
     file.flush();
     file.close();
     QTextStream ts (stdout);
