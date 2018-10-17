@@ -82,8 +82,6 @@ private:
     QString tempFile;
     QList<studData> Info;
     studData title; //数据表头
-
-\
 };
 
 ScoreSorter::ScoreSorter(QString dataFile)
@@ -133,30 +131,22 @@ void ScoreSorter::doSort()
 
 }
 
-
-
-
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QByteArray localMsg = msg.toLocal8Bit();
-            switch (type)
-            {
-            case QtDebugMsg:
-                fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-                break;
-            case QtInfoMsg:
-                fprintf(stderr, "Info: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-                break;
-            case QtWarningMsg:
-                fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-                break;
-            case QtCriticalMsg:
-                fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-                break;
-            case QtFatalMsg:
-                fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-                abort();
-            }
+    // 输出信息至文件中（读写、追加形式）
+    //QString fileName="D:/1403160109/0109/build-homework02-unknown-Debug/data.txt";
+    //QFile file(fileName);
+    QFile file("Sorter_data.txt");
+    file.open(QIODevice::WriteOnly | QIODevice::Append);
+    QTextStream stream(&file);
+    stream <<msg << endl;
+    file.flush();
+    file.close();
+    QTextStream ts (stdout);
+    ts << msg << endl;
+    file.flush();
+    file.close();
+
     // 自定义qDebug
 }
 
@@ -167,7 +157,7 @@ int main(int argc, char *argv[])
     Q_UNUSED(argc);
     Q_UNUSED(argv);
 
-    //qInstallMessageHandler(myMessageOutput);
+    qInstallMessageHandler(myMessageOutput);
     QString datafile = "D:/1403160109/0109/build-homework02-unknown-Debug/data.txt";
 
     // 如果排序后文件已存在，则删除之
