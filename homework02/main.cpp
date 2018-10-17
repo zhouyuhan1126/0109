@@ -133,11 +133,9 @@ void ScoreSorter::doSort()
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    // 输出信息至文件中（读写、追加形式）
-    //QString fileName="D:/1403160109/0109/build-homework02-unknown-Debug/data.txt";
-    //QFile file(fileName);
+    // 输出信息至文件中
     QFile file("Sorter_data.txt");
-    file.open(QIODevice::WriteOnly | QIODevice::Append);
+    file.open( QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text );
     QTextStream stream(&file);
     stream <<msg << endl;
     file.flush();
@@ -146,8 +144,6 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
     ts << msg << endl;
     file.flush();
     file.close();
-
-    // 自定义qDebug
 }
 
 
