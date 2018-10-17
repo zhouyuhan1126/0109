@@ -41,7 +41,6 @@ enum SortKind{
 };
 }
 
-
 typedef struct{
     // 结构定义
     QStringList stu;
@@ -50,7 +49,7 @@ typedef struct{
 QDebug operator<< (QDebug d, const studData &data) {
     // 请补全运算符<<重载函数，使其可以直接输出studData结构
     for(int i=0;i<data.stu.size();i++)
-        d.noquote().nospace()<<QString(data.stu.at(i))<<" " ;
+        d.noquote().nospace()<<QString(data.stu.at(i))<<"\t" ;
     return d;
 }
 // 比较类，用于std::sort第三个参数
@@ -70,7 +69,6 @@ bool myCmp::operator()(const studData &d1, const studData &d2)
     return result;
 
 }
-
 
 class ScoreSorter
 {
@@ -122,7 +120,7 @@ void ScoreSorter::doSort()
         myCmp cmp(i);
         std::sort(this->Info.begin(),this->Info.end(),cmp);
         qDebug()<<"排序后输出，当前排序第"<<i+1<<"列";
-        qDebug()<<(this->title);
+        qDebug()<<"\t"<<(this->title);
         for(int i=0;i<this->Info.size();i++)
             qDebug()<<this->Info.at(i);
         qDebug()<<"-----------------------------------------------------------------------\n";
@@ -134,7 +132,7 @@ void ScoreSorter::doSort()
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // 输出信息至文件中
-    QFile file("Sorter_data.txt");
+    QFile file("sorter_data.txt");
     file.open( QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text );
     QTextStream stream(&file);
     stream <<msg << endl;
@@ -153,16 +151,13 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     Q_UNUSED(argc);
     Q_UNUSED(argv);
-
     qInstallMessageHandler(myMessageOutput);
     QString datafile = "D:/1403160109/0109/build-homework02-unknown-Debug/data.txt";
-
     // 如果排序后文件已存在，则删除之
     QFile f("sorted_"+datafile);
     if (f.exists()){
         f.remove();
     }
-
     ScoreSorter s(datafile);
     s.readFile();
     s.doSort();
