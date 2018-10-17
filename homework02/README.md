@@ -17,3 +17,6 @@
 ### 第五次提交：
 
 使用QIODevice::Text，使sorter_data.txt文本内可以换行，实现作业要求，但输出窗口排序仍未整齐。
+### 第六次提交：
+
+增加stream.setCodec("UTF-8")代码，写入用UTF-8编码。
