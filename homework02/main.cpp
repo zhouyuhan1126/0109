@@ -53,7 +53,8 @@ QDebug operator<< (QDebug d, const studData &data) {
     return d;
 }
 // 比较类，用于std::sort第三个参数
-class myCmp {
+class myCmp
+{
 public:
     myCmp(int selectedColumn) { this->currentColumn = selectedColumn; }
     bool operator() (const studData& d1,const studData& d2);
@@ -67,7 +68,6 @@ bool myCmp::operator()(const studData &d1, const studData &d2)
     quint32 sortedColumn = 0x00000001<<currentColumn;
     result=(d1.stu.at(currentColumn)>d2.stu.at(currentColumn));
     return result;
-
 }
 
 class ScoreSorter
@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
     Q_UNUSED(argc);
     Q_UNUSED(argv);
     qInstallMessageHandler(myMessageOutput);
-    QString datafile = "D:/1403160109/0109/build-homework02-unknown-Debug/data.txt";
+    QString datafile = "data.txt";
     // 如果排序后文件已存在，则删除之
     QFile f("sorted_"+datafile);
     if (f.exists()){
