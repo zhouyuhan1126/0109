@@ -22,4 +22,4 @@
 增加stream.setCodec("UTF-8")代码，写入用UTF-8编码。
 ### 第七次提交：
 
-修改小bug，是排序更整齐美观；提交新生成的sorter_data.txt文件。
+修改小bug，使排序更整齐美观；提交新生成的sorter_data.txt文件。
