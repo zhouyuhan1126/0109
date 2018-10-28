@@ -10,6 +10,9 @@
 #include <QLineEdit>
 #include <QDebug>
 
+
+
+
 CenterFrame::CenterFrame(QWidget *parent) : QFrame(parent)
 {
     // 创建用户命令区
@@ -90,7 +93,7 @@ void CenterFrame::createUserCommandArea()
     QPointF pt2(p.size().width()/2,3);
     QPointF pt3(-3+p.size().width(),-3+p.size().height());
     QVector<QPointF> pts;
-    pts<<pt1<<pt2<<pt2<<pt3<<pt3<<pt1;
+    pts<<pt1<<pt2<<pt2<<pt3<<pt3<<pt1;   
 
     // 使用drawLines时需要注意，点数必须为偶数，两两成对作为一个边
     // 如果是奇数，最后一个点会被舍弃
@@ -116,13 +119,35 @@ void CenterFrame::createUserCommandArea()
     connect(btnText,&QPushButton::clicked,
             this,&CenterFrame::on_btnTextClicked);
 
+    //菱形
+    btnrhombus =new QPushButton(group);
+    btnrhombus->setToolTip("绘制菱形");
+    btnrhombus->setCheckable(true);
+    btnrhombus->setIconSize(p.size());
+    //菱形的四个顶点
+    p.fill(BACKGROUND_COLOR);
+    QPointF pt4(p.size().width()/2,3);
+    QPointF pt5(3,p.size().height()/2);
+    QPointF pt6(p.size().width()/2,p.size().height()-3);
+    QPointF pt7(p.size().width()-3,p.size().height()/2);
+    QVector<QPointF> ptb;
+    ptb<<pt7<<pt4<<pt4<<pt5<<pt5<<pt6<<pt6<<pt7;
+
+    painter.drawPolygon(ptb);
+    btnrhombus->setIcon (QIcon(p));
+    connect(btnrhombus,&QPushButton::clicked,
+           this,&CenterFrame::on_btnrhombusClicked);
+
+
+
     // 选项Group布局
     QGridLayout *gridLayout = new QGridLayout();
     gridLayout->addWidget(btnRect,0,0);
     gridLayout->addWidget(btnEllipse,0,1);
     gridLayout->addWidget(btnTriangle,1,0);
     gridLayout->addWidget(btnLine,1,1);
-    gridLayout->addWidget(btnText,2,0);
+    gridLayout->addWidget(btnText,2,1);
+    gridLayout->addWidget(btnrhombus,2,0);
     gridLayout->setMargin(3);
     gridLayout->setSpacing(3);
     group->setLayout(gridLayout);
@@ -300,6 +325,18 @@ void CenterFrame::on_edtTextEdited(const QString &text)
 {
     drawWidget->setDrawnText(text);
 }
+
+//绘制菱形按键响应槽函数
+void CenterFrame::on_btnrhombusClicked()
+{
+    if(btnrhombus->isChecked()){
+         drawWidget->setShapeType(ST::rhombus);
+         updateButtonStatus();
+    }
+    else{
+         drawWidget->setShapeType(ST::None);
+     }
+ }
 
 
 

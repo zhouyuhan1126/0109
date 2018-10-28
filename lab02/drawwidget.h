@@ -32,6 +32,7 @@ public slots:
     void setColor(QColor);
     void clear();
 
+
 private :
     QPixmap *pix;
     QPoint startpos;

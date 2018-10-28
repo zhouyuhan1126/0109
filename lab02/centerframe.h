@@ -40,6 +40,8 @@ protected slots:
     void on_btnTriangleClicked();
     void on_btnTextClicked();
     void on_edtTextEdited(const QString &text);
+    void on_btnrhombusClicked();
+
 
 private:
     QVBoxLayout* vLayout;
@@ -49,9 +51,11 @@ private:
     QPushButton* btnRect;
     QPushButton* btnEllipse;
     QPushButton* btnLine;
-    QPushButton* btnTriangle;
+    QPushButton* btnTriangle;    
+    QPushButton* btnrhombus;
     QPushButton* btnText;
-    QLineEdit* edtText;
+    QLineEdit* edtText;  
+
  };
 
 #endif // CENTERFRAME_H
