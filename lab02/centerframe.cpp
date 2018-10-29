@@ -9,8 +9,9 @@
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QDebug>
-
-
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QVector>
 
 
 CenterFrame::CenterFrame(QWidget *parent) : QFrame(parent)
@@ -138,7 +139,18 @@ void CenterFrame::createUserCommandArea()
     connect(btnrhombus,&QPushButton::clicked,
            this,&CenterFrame::on_btnrhombusClicked);
 
-
+    //绘制图片
+    btnpicture = new QPushButton(group);
+    btnpicture ->setToolTip("绘制图片");
+    btnpicture ->setCheckable(true);
+    btnpicture ->setIconSize(p.size());
+    p.fill(BACKGROUND_COLOR);
+    QImage image(":/user");
+    QRect targetRect(0,0,p.size().width(),p.size().height());
+    QRect sourceRect =image.rect();
+    painter.drawImage(targetRect,image,sourceRect);
+    btnpicture->setIcon (QIcon(p));
+    connect(btnpicture,&QPushButton::clicked,this, &CenterFrame::on_btnpictureClicked);
 
     // 选项Group布局
     QGridLayout *gridLayout = new QGridLayout();
@@ -148,6 +160,7 @@ void CenterFrame::createUserCommandArea()
     gridLayout->addWidget(btnLine,1,1);
     gridLayout->addWidget(btnText,2,1);
     gridLayout->addWidget(btnrhombus,2,0);
+    gridLayout->addWidget(btnpicture,3,0);
     gridLayout->setMargin(3);
     gridLayout->setSpacing(3);
     group->setLayout(gridLayout);
@@ -338,5 +351,19 @@ void CenterFrame::on_btnrhombusClicked()
      }
  }
 
+//绘制图片按键响应槽函数
+void CenterFrame::on_btnpictureClicked()
+{
+     if(btnpicture->isChecked())
+     {
+        drawWidget->setShapeType(ST::picture);
+        drawWidget->picture();
 
+        updateButtonStatus();
+     }
+     else{
+     drawWidget->setShapeType(ST::None);
+     }
+
+}
 

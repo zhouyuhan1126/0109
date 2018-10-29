@@ -41,6 +41,7 @@ protected slots:
     void on_btnTextClicked();
     void on_edtTextEdited(const QString &text);
     void on_btnrhombusClicked();
+    void on_btnpictureClicked();
 
 
 private:
@@ -55,7 +56,7 @@ private:
     QPushButton* btnrhombus;
     QPushButton* btnText;
     QLineEdit* edtText;  
-
+    QPushButton* btnpicture;
  };
 
 #endif // CENTERFRAME_H
